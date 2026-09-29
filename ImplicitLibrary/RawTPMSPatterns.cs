@@ -111,6 +111,24 @@ namespace Leap71
             }
         }
 
+        public class RawSheetDiamondTPMSPattern : IRawTPMSPattern
+        {
+            const float m_fFrequencyScale = (2f * MathF.PI);
+
+            public RawSheetDiamondTPMSPattern() { }
+
+            public float fGetSignedDistance(float fX, float fY, float fZ)
+            {
+                float fDist = +(MathF.Cos(m_fFrequencyScale * fX) *
+                               MathF.Cos(m_fFrequencyScale * fY) *
+                               MathF.Cos(m_fFrequencyScale * fZ))
+                             - (MathF.Sin(m_fFrequencyScale * fX) *
+                               MathF.Sin(m_fFrequencyScale * fY) *
+                               MathF.Sin(m_fFrequencyScale * fZ));
+                return fDist;
+            }
+        }
+
         public class RawTransitionTPMSPattern : IRawTPMSPattern
         {
             IRawTPMSPattern   m_xTPMS_01;
